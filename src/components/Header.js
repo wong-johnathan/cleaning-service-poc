@@ -1,6 +1,7 @@
-import { faBell, faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Button, Col, Row } from "reactstrap";
 
 const style = {
@@ -14,6 +15,8 @@ const style = {
 };
 
 const Header = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
   return (
     <>
       <div style={{ height: "65px" }} />
@@ -24,14 +27,23 @@ const Header = () => {
           position: "fixed",
           top: 0,
           maxWidth: "550px",
-          background:'white',zIndex:1000,
-          boxShadow:'#0000001a 0px 1rem 1rem 0px'
+          background: "white",
+          zIndex: 1000,
+          boxShadow: "#0000001a 0px 1rem 1rem 0px",
         }}
       >
         <Col xs="2" className="text-center px-0">
-          <Button style={style.button} color="white">
-            <FontAwesomeIcon icon={faBell} color="gray" />
-          </Button>
+          {location.pathname !== "/" ? (
+            <Button
+              style={style.button}
+              color="none"
+              onClick={() => navigate(-1)}
+            >
+              <FontAwesomeIcon icon={faArrowLeft} color="gray" />
+            </Button>
+          ) : (
+            ""
+          )}
         </Col>
         <Col
           className="text-center font-weight-bold px-0"
@@ -40,9 +52,9 @@ const Header = () => {
           Rate your Contractor
         </Col>
         <Col xs="2" className="text-center px-0">
-          <Button style={style.button} color="white">
+          {/* <Button style={style.button} color="white">
             <FontAwesomeIcon icon={faSearch} color="gray" />
-          </Button>
+          </Button> */}
         </Col>
       </Row>
     </>

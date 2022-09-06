@@ -1,0 +1,9 @@
+.projects{
+    transition: 0.3s ease all;
+    transform:scaleX(1)scaleY(1);
+    cursor:pointer;
+}
+
+.projects:hover{
+    transform:scaleX(1.05) scaleY(1.05);
+}
