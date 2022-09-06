@@ -4,11 +4,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { Button, Col, Row } from "reactstrap";
+import {
+  Button,
+  Col,
+  Row,
+} from "reactstrap";
 import Rating from "../../components/Rating/Rating";
 import ContractorInfo from "./ContractorInfo";
 import style from "./ContractorProfile.module.css";
-console.log(style);
+// import ProjectCarousel from "./ProjectCarousel";
 
 const ContractorProfile = () => {
   const { id } = useParams();
@@ -17,6 +21,8 @@ const ContractorProfile = () => {
   );
 
   const [rating, setRating] = useState(0);
+  const [isOpen, setIsOpen] = useState(true);
+  const [project, setProject] = useState("");
   const [fields, setFields] = useState({
     address: `${faker.address.street()}, ${faker.address.city()}, ${faker.address.country()}`,
     email: faker.internet.email(),
@@ -92,7 +98,8 @@ const ContractorProfile = () => {
                     border: "1px solid #0000000F",
                     borderRadius: "0.5rem",
                   }}
-                ></img>
+                  onClick={() => setProject(project)}
+                />
               </Col>
             ))}
           </Row>
@@ -119,7 +126,7 @@ const ContractorProfile = () => {
                   icon={faStar}
                   color={rating > i ? "gold" : "gray"}
                   style={{ cursor: "pointer" }}
-                  onClick={() => setRating(rating===i+1?0:i+1)}
+                  onClick={() => setRating(rating === i + 1 ? 0 : i + 1)}
                 />
               </Col>
             ))}
